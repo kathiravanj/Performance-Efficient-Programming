@@ -1,0 +1,38 @@
+#Naive way
+def minion_game(string):
+    n = len(string)
+    stuart = [i for i in string if not i in ['a','e','i','o','u','A','E','I','O','U']]
+    ken = [i for i in string if i in ['a','e','i','o','u','A','E','I','O','U']]
+    s_words = {}
+    k_words = {}
+    s_count = 0
+    k_count = 0
+
+    for i in range(n): 
+        for l in range(i+1,n+1): 
+            if string[i: l][0] in set(stuart):
+                s_words[string[i: l]] = 1
+            elif string[i: l][0] in set(ken):
+                k_words[string[i: l]] = 1
+
+    for k,v in s_words.items():
+        s_words[k] = sum([1 for i in range(len(string)) if string[i:i+len(k)] == k])
+    for k,v in k_words.items():
+        k_words[k] = sum([1 for i in range(len(string)) if string[i:i+len(k)] == k])
+     
+    for i in s_words.values():
+        s_count +=i
+    for i in k_words.values():
+        k_count +=i
+    if s_count > k_count:
+        print('{} {}'.format('Stuart',s_count))
+    elif s_count < k_count:
+        print('{} {}'.format('Kevin',k_count))
+    else:
+        print('Draw')
+
+    #print(s_words,k_words)
+    
+if __name__ == '__main__':
+    s = raw_input()
+    minion_game(s)
