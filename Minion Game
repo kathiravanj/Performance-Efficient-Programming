@@ -36,3 +36,32 @@ def minion_game(string):
 if __name__ == '__main__':
     s = raw_input()
     minion_game(s)
+    
+#efficient way
+# reduce the combination loops to one single loop
+# instead of generating all the words and storing it, just focus on a logic to count the words
+# len(string)-i is going to return the count of words starting with each character in the input words.
+# just add up that value to stuart or Kevin based on the starting character
+
+def minion_game(string):
+    n = len(string)
+    vowels = ['a','e','i','o','u','A','E','I','O','U']
+    s_count = 0
+    k_count = 0
+    
+    for i in range(n):
+      if string[i] in vowels:
+          k_count += (len(string)-i)
+      else:
+          s_count += (len(string)-i)
+
+    if s_count > k_count:
+        print('{} {}'.format('Stuart',s_count))
+    elif s_count < k_count:
+        print('{} {}'.format('Kevin',k_count))
+    else:
+        print('Draw')
+
+if __name__ == '__main__':
+    s = input()
+    minion_game(s)
