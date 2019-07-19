@@ -1,0 +1,27 @@
+# there is one captain and unknown number of groups.
+# captain has to get a room and each group has to get a room.
+#k is the number of people is each group
+#a is an unordered set of room numbers for each tourist
+#Identify the capatin room number
+
+#naive way
+k = int(raw_input())
+a = list(raw_input().split())
+b = set(a)
+result = [i for i in b if a.count(i) == 1]
+for i in result:
+    print (i)
+
+# efficient way - use maths
+'''
+cap_key + k * tourist_key = s1
+cap_key*k + tourist_key*k = s2
+s2-s1 = cap_key*k + tourist_key*k - cap_key - k*tourist_key
+s2-s1 = cap_key*k - cap_key
+s2-s1 = cap_key(k-1)
+cap_key = (s2-s1)/(k-1)
+'''
+k = int(raw_input())
+s1 = list(map(int,raw_input().split()))
+s2 = set(s1)
+print(((sum(s2)*k)-(sum(s1)))//(k-1))
